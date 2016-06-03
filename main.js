@@ -29,7 +29,10 @@
       return false;
     }
   })
-      console.log(priceRange);
+
+  var itemTitle = map(priceRange, items.title);
+
+  console.log("Items that cost between $14.00-$18.00 USD: ", (itemTitle));
 
 
 //** Challenge #3 - Find items priced with "GBP" currency, then display product title & price
