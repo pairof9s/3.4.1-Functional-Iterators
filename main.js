@@ -12,7 +12,7 @@
     if(previousValue === undefined){
       previousValue = 0;
     }
-    console.log(previousValue);
+    //console.log(previousValue);
     {return(previousValue + currentValue.price);
     }
   }, 0);
@@ -77,15 +77,22 @@ var totalMaterials = items.filter(function(title, index, array){
 })
     console.log(totalMaterials.length);
 
+
 //** Challenge #6 - Find items made by their seller
 
+var sellerMade = items.filter(function(title, index, array) {
+  if(title.used_manufacturer == false ){
+    return true;
+  }else {
+    return false;
+  }
+})
 
+var itemTitle = sellerMade.map(function(item){
+  return item["title"];
+});
 
-
-
-
-
-
+  console.log("Items made by the seller: ", itemTitle);
 
 }());
 
