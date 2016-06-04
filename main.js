@@ -30,9 +30,11 @@
     }
   })
 
-  var itemTitle = map(priceRange, items.title);
+  var itemTitle = priceRange.map(function(item){
+    return item["title"];
+  });
 
-  console.log("Items that cost between $14.00-$18.00 USD: ", (itemTitle));
+  console.log("Items that cost between $14.00-$18.00 USD: ", itemTitle);
 
 
 //** Challenge #3 - Find items priced with "GBP" currency, then display product title & price
@@ -44,7 +46,14 @@ var poundProduct = items.filter(function(title, index, array) {
     return false;
   }
 })
-    console.log(poundProduct['title'], + ' cost: ' + poundProduct['price']);
+
+var itemTitle = poundProduct.map(function(item){
+  return item["title"]
+});
+var itemPrice = poundProduct.map(function(item) {
+  return item["price"];
+});
+    console.log(itemTitle, " cost: ", itemPrice);
 
 
 //** Challenge #4 - Finds items made of wood material
@@ -87,7 +96,7 @@ var totalMaterials = items.filter(function(title, index, array){
 
 
 
-//** Function "map" shortcut code **//
+//** Function "reduce" shortcut code **//
 function reduce(arrayToLoopOver, callback){  // function provides the reduction price for the called array values (note: must be integers for the function to work)
   var accumulator;
   for(var i=0; i<arrayToLoopOver.length; i++){
@@ -102,4 +111,14 @@ function forEach(arrayToLoopOver, callback){
   for(var i=0; i<arrayToLoopOver.length; i++){
     callback(arrayToLoopOver[i], i, arrayToLoopOver);
   }
+}
+
+
+//** Function "map" shortcut code **//
+function map(arrayToLoopOver, callback){
+  var newArray = [];
+  for(var i=0; i<arrayToLoopOver.length; i++){
+    newArray.push(callback(arrayToLoopOver[i], i, arrayToLoopOver));
+  }
+  return newArray;
 }
