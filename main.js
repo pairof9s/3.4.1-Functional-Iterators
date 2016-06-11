@@ -25,16 +25,13 @@
   var priceRange = items.filter(function(title, index, array) {
     if(title.price >= 14 && title.price <= 18){
       return true;
-    }else {
-      return false;
     }
-  })
-
-  var itemTitle = priceRange.map(function(item){
-    return item["title"];
   });
+    var priceTitles = priceRange.reduce(function(title, index, array) {
+      return index.title;
+    });
 
-  console.log("Items that cost between $14.00-$18.00 USD: ", itemTitle);
+  console.log("Items that cost between $14.00-$18.00 USD: " + priceTitles);  // Cannot determine how to provides results which include multiple values. Should another function be made to set these values to a new array? I can place a square bracket ("[]") and say "0" to get the first value (product title), but of course that omits the remaining items and doesn't compensate for an unknown number of values.
 
 
 //** Challenge #3 - Find items priced with "GBP" currency, then display product title & price
@@ -42,26 +39,24 @@
 var poundProduct = items.filter(function(title, index, array) {
   if(title.currency_code === "GBP"){   // the "===" operator is used rather than "==" since it needs to be a strict equal rather than "true/false" equation.
     return true;
-  }else {
-    return false;
   }
-})
+});
 
-var itemTitle = poundProduct.map(function(item){
-  return item["title"]
+var itemName = poundProduct.filter(function(item){
+  return item.title;
 });
-var itemPrice = poundProduct.map(function(item) {
-  return item["price"];
+var itemPrice = poundProduct.filter(function(item) {
+  return item.price;
 });
-    console.log(itemTitle, " cost: ", itemPrice);
+    console.log(itemName[0].title, ": cost -", itemPrice[0].price + "GBP");
 
 
 //** Challenge #4 - Finds items made of wood material
 
 var woodProduct = items.filter(function(title, index, array) {
-    return title.materials.indexOf('wood') >=0;  // "indexOf" is method to search an array, so in this sense, once we locate our target array ("materials"), we ask "indexOf" to then search within its array. ">=0" is to see if the value of the ...indexOf() is met; if not, a value of -1 is given thus it doesn't meet the requirement of ">=". That returns a value of false.
+    return title.materials.indexOf('wood') >=0;  // "indexOf" is method to search an array within an array; so in this sense, once we locate our target array ("materials"), we ask "indexOf" to then search within its array. ">=0" is to see if the value of the ...indexOf() is met; if not, a value of -1 is given thus it doesn't meet the requirement of ">=". That returns a value of false.
 
-})
+});
     console.log(woodProduct.length);
 
 
@@ -74,25 +69,21 @@ var totalMaterials = items.filter(function(title, index, array){
     return false;
   }
 
-})
+});
     console.log(totalMaterials.length);
 
 
 //** Challenge #6 - Find items made by their seller
 
 var sellerMade = items.filter(function(title, index, array) {
-  if(title.used_manufacturer == false ){
+  if(title.used_manufacturer === false ){
     return true;
-  }else {
-    return false;
   }
-})
-
-var itemTitle = sellerMade.map(function(item){
-  return item["title"];
 });
 
-  console.log("Items made by the seller: ", itemTitle);
+var itemSeller = sellerMade[0].title;
+
+console.log("Items made by the seller: ", itemSeller);
 
 }());
 
